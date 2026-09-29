@@ -126,13 +126,29 @@
     blockquote { margin: 0; font-size: clamp(29px, 5vw, 58px); line-height: 1.38; letter-spacing: .04em; font-weight: 400; }
     .quote-source { display: block; margin-top: 18px; color: rgb(var(--muted)); font-size: 12px; letter-spacing: .18em; }
 
-    .reader-wrap { width: min(100%, 780px); margin: auto; }
-    .trial-note { margin: 0 0 20px; color: rgb(var(--muted)); text-align: center; font-size: 12px; letter-spacing: .08em; }
-    .reader { position: relative; padding: clamp(32px, 7vw, 76px) clamp(22px, 7vw, 82px); background: rgba(var(--surface-strong), .9); box-shadow: 0 24px 80px rgba(var(--shadow), .08); border-top: 1px solid rgb(var(--line)); }
-    .trial-progress { position: sticky; top: var(--nav-h); z-index: 20; height: 3px; margin: 0 calc(clamp(22px, 7vw, 82px) * -1) 52px; background: rgba(var(--line), .45); }
-    .trial-progress span { display: block; width: 100%; height: 100%; background: rgb(var(--accent)); transform: scaleX(0); transform-origin: left; will-change: transform; }
-    .reader h3 { margin: 0 0 52px; text-align: center; font-size: clamp(25px, 4vw, 34px); font-weight: 500; letter-spacing: .12em; }
-    .reader p { margin: 0 0 1.34em; font-family: "Songti SC", "Noto Serif SC", serif; font-size: clamp(16px, 1.8vw, 18px); line-height: 2.05; letter-spacing: .025em; text-align: justify; text-justify: inter-ideograph; }
+    .excerpts { width: min(100%, 940px); margin: auto; counter-reset: excerpt; }
+    .excerpt { counter-increment: excerpt; display: grid; grid-template-columns: 64px minmax(0, 1fr) auto; align-items: baseline; gap: clamp(18px, 4vw, 46px); padding: clamp(25px, 3.5vw, 38px) 0; border-top: 1px solid rgb(var(--line)); }
+    .excerpt:last-child { border-bottom: 1px solid rgb(var(--line)); }
+    .excerpt::before { content: counter(excerpt, decimal-leading-zero); color: rgb(var(--muted)); font-size: 11px; letter-spacing: .18em; }
+    .excerpt p { margin: 0; font-family: "Songti SC", "Noto Serif SC", serif; font-size: clamp(19px, 2.8vw, 29px); line-height: 1.72; letter-spacing: .035em; }
+    .excerpt cite { color: rgb(var(--muted)); font-size: 11px; font-style: normal; letter-spacing: .12em; white-space: nowrap; }
+    .ecosystem { display: grid; grid-template-columns: minmax(0, 1.18fr) minmax(320px, .82fr); gap: clamp(34px, 6vw, 76px); align-items: start; }
+    .workbench { position: relative; min-height: 360px; padding: clamp(34px, 5vw, 60px); background: rgb(var(--ink)); color: rgb(var(--paper)); overflow: hidden; }
+    .workbench::after { content: ""; position: absolute; width: 240px; aspect-ratio: 1; right: -92px; bottom: -112px; border: 1px solid rgba(var(--paper), .2); border-radius: 50%; box-shadow: 0 0 0 34px rgba(var(--paper), .035), 0 0 0 68px rgba(var(--paper), .025); }
+    .workbench-mark { display: grid; grid-template-columns: repeat(3, 10px); gap: 5px; width: max-content; margin-bottom: clamp(62px, 9vw, 100px); }
+    .workbench-mark i { display: block; width: 10px; height: 10px; border: 1px solid rgba(var(--paper), .72); }
+    .workbench-mark i:nth-child(1), .workbench-mark i:nth-child(5), .workbench-mark i:nth-child(9) { background: rgb(var(--paper)); }
+    .workbench h3 { margin: 0 0 14px; font-size: clamp(32px, 4vw, 48px); font-weight: 500; letter-spacing: .08em; }
+    .workbench p { width: min(100%, 32em); margin: 0 0 30px; color: rgba(var(--paper), .72); font-size: 15px; line-height: 1.9; }
+    .workbench-link { position: relative; z-index: 2; display: inline-flex; align-items: center; gap: 13px; padding: 11px 0; color: rgb(var(--paper)); text-decoration: none; border-bottom: 1px solid rgba(var(--paper), .54); font-size: 14px; letter-spacing: .12em; }
+    .workbench-link span { font-family: sans-serif; transition: transform .2s ease; }
+    .workbench-link:hover span, .workbench-link:focus-visible span { transform: translateX(4px); }
+    .channels { border-top: 1px solid rgb(var(--line)); }
+    .channels-intro { margin: 0 0 26px; color: rgb(var(--muted)); font-size: 14px; line-height: 1.85; }
+    .channel { display: grid; grid-template-columns: 42px minmax(0, 1fr) auto; align-items: center; gap: 15px; padding: 22px 0; border-bottom: 1px solid rgb(var(--line)); }
+    .channel-num { color: rgb(var(--muted)); font-size: 11px; letter-spacing: .16em; }
+    .channel-name { font-family: "Songti SC", "Noto Serif SC", serif; font-size: clamp(20px, 2.6vw, 27px); letter-spacing: .08em; }
+    .channel-status { color: rgb(var(--muted)); font-size: 11px; letter-spacing: .14em; white-space: nowrap; }
     .finale { min-height: 58svh; display: grid; place-items: center; text-align: center; background: linear-gradient(180deg, transparent, rgba(168,184,200,.2)); }
     .finale p { margin: 0; font-family: "Songti SC", "Noto Serif SC", serif; font-size: clamp(23px, 4.6vw, 46px); line-height: 1.65; letter-spacing: .1em; }
     footer { padding: 32px 20px calc(32px + env(safe-area-inset-bottom)); border-top: 1px solid rgba(var(--line), .54); text-align: center; color: rgb(var(--muted)); font-size: 12px; letter-spacing: .12em; }
@@ -166,9 +182,13 @@
       .quote-row { width: 95%; }
       .quote-row:nth-child(even) { width: 92%; }
       blockquote { font-size: 31px; }
-      .reader { margin-inline: -18px; border-top-color: rgb(var(--line)); padding: 34px 22px 50px; }
-      .trial-progress { margin: 0 -22px 42px; }
-      .reader p { text-align: left; font-size: 17px; }
+      .excerpt { grid-template-columns: 32px minmax(0, 1fr); gap: 10px 12px; }
+      .excerpt p { font-size: 20px; line-height: 1.8; }
+      .excerpt cite { grid-column: 2; }
+      .ecosystem { grid-template-columns: 1fr; }
+      .workbench { min-height: 330px; }
+      .channel { grid-template-columns: 34px minmax(0, 1fr) auto; gap: 10px; }
+      .channel-status { letter-spacing: .08em; }
     }
     @media (max-width: 390px) {
       .navlinks { gap: 10px; }
@@ -189,7 +209,7 @@
     <div class="shell">
       <div class="wordmark">暮冬念春</div>
       <nav class="navlinks" aria-label="页面导航">
-        <a href="#story">故事</a><a href="#chars">人物</a><a href="#quotes">语录</a><a href="#trial">试读</a>
+        <a href="#story">故事</a><a href="#chars">人物</a><a href="#quotes">语录</a><a href="#trial">摘句</a><a href="#ecosystem">生态</a>
       </nav>
     </div>
   </header>
@@ -273,111 +293,42 @@
 
     <section class="section" id="trial" aria-labelledby="trial-title">
       <div class="shell">
-        <div class="section-head reveal"><span class="section-index">04</span><h2 id="trial-title">试读</h2></div>
-        <div class="reader-wrap reveal" style="--delay:120ms">
-          <p class="trial-note">试读为精修前版本，最终以出版稿为准</p>
-          <article class="reader" aria-label="第001章 暮冬未尽时">
-            <div class="trial-progress" aria-hidden="true"><span></span></div>
-<h3>第001章　暮冬未尽时</h3>
-<p>二月底的疆州，雪还没化干净。</p>
-<p>“到了，下车吧。”大姨拍拍她的肩。温霜禾站在三中校门口，书包带攥在手里，勒出一圈浅红。身后是辆小货车，车厢门敞着，剩一只旧纸箱和一床编织袋裹的被子。那只旧纸箱是母亲的，边角已经磨软。司机蹲在路边抽烟，大姨在传达室替她办手续。</p>
-<p>母亲没来。父亲也没有。</p>
-<p>温霜禾低头看脚边的雪。雪被踩脏，薄薄一层贴着水泥地，边缘泛着灰黑。她用鞋尖碰一下，雪碎开，底下露出灰黄的泥水。风从巷口灌进来，凉飕飕的，顺着领口往下钻。</p>
-<p>这是她第三次转学。</p>
-<p>第一次小学三年级，家里被父亲欠的债拖垮，债主半夜砸门。母亲抱着她躲在旅馆里，一夜没敢开灯。旅馆的被子有股霉味，母亲的手臂箍在她身上，她害怕得喘不过气，却没敢动。第二次小学五年级，父亲跪在门口说自己会改，母亲心软回去，第三天茶几又碎。玻璃碴子崩一地，母亲蹲着捡，手指流血，没敢哭出声。</p>
-<p>温霜禾记得那天晚上。</p>
-<p>她躲在房间里，捂着耳朵，听见外面摔东西的声音。玻璃碎裂，母亲压抑的哭，父亲含糊的咒骂。她数到一百，声音停。又数到两百，才敢开门。</p>
-<p>母亲蹲在碎片里，手指划破，血滴在白色碎玻璃上，像开一朵小花。那朵花很小，红色的，和母亲的眼泪一样安静。</p>
-<p>“妈。”她喊一声。</p>
-<p>母亲抬头，脸上有泪痕，却笑着说：“没事，妈妈不小心打碎茶几。”</p>
-<p>温霜禾没说话。她走过去，蹲下来，和母亲一起捡。玻璃锋利，她的手被划一道，血渗出来，没吭声。</p>
-<p>母亲抓住她的手，眼泪掉得更凶：“别捡，别捡……”</p>
-<p>“没事。”温霜禾说，“不疼。”</p>
-<p>其实疼。指尖发白，掌心冒汗，但她知道，说疼也没有用。只会让爱她的人更难受。</p>
-<p>从那以后，她学会不说疼。</p>
-<p>这一次，母亲没跟她一起走。临走前，母亲把钱塞进大姨手里，手指发抖，攥紧又松开，松开又攥紧，最后才放开。母亲蹲下来，把她的围巾裹紧，嘴唇微微动一下，像要说什么，最后只摸摸她的头。</p>
-<p>“等家里安稳些，妈妈来接你。”</p>
-<p>温霜禾点头。</p>
-<p>她没问什么时候安稳。她已经知道，有些大人说出口的话，只是暂时让人别追问的办法。</p>
-<p>“温霜禾？”</p>
-<p>周老师三十多岁，扎着低马尾，站在传达室门口叫她。大姨跟在后面，手里拿着一叠表格，笑得有点局促。</p>
-<p>“手续办完，初一三班，班主任姓周。”老师看她一眼，语气放缓，“成绩不错，到新班好好适应。”</p>
-<p>温霜禾点头。“好。”</p>
-<p>声音很轻。</p>
-<p>大姨把她的围巾往上拉一拉，围巾边缘起毛球，蹭着下巴痒痒的。那条围巾是母亲织的，针脚有些松，像母亲此刻的心。“放学别乱跑，直接回杂货铺。要是有人欺负你，跟大姨说。”</p>
-<p>“不会的。”温霜禾说，“我都多大了。”</p>
-<p>“多大也是孩子。”大姨瞪她一眼，又看向老师，“老师，我们家这孩子老实，要是有什么事，您打我电话，我随叫随到。”</p>
-<p>周老师笑。“您放心，我们班氛围挺好的。”</p>
-<p>“那就好，那就好。”大姨搓搓手，从口袋里摸出一把糖，硬塞进老师手里，“这是我们自己铺里卖的，您尝尝，别嫌弃。”</p>
-<p>周老师推辞不过，收下。“您太客气。”</p>
-<p>大姨这才放心些，蹲下来帮温霜禾理理衣领，低声说：“放学回来，大姨给你包饺子。”</p>
-<p>温霜禾抬起脸，冲大姨笑一下。</p>
-<p>这个笑她练过很多次。嘴角弯起来，眼睛跟着软一点，看起来懂事、乖巧、不给任何人添麻烦。</p>
-<p>“没人会欺负我的。”</p>
-<p>大姨看着她，想说什么，最后只是叹气，把旧纸箱抱回车边。</p>
-<p>教学楼是红砖的，墙角堆着没扫干净的积雪。走廊贴满光荣榜和班级评比栏，红纸黄字，边角被风吹得卷起来。学生们从她身边跑过去，衣袖擦过她的手背，带起一阵凉风。她往旁边让让，背贴上冰凉的墙。</p>
-<p>周老师见到她，先笑一下。</p>
-<p>“进来吧。”</p>
-<p>教室里一瞬间安静。几十双眼睛看过来，有好奇，有打量，也有漫不经心。空气里有粉笔灰和暖气片烘出来的干燥味道。温霜禾走上讲台，手指在袖口里蜷着，脸上仍然挂着那个标准的笑。</p>
-<p>“我叫温霜禾，温暖的温，霜降的霜，禾苗的禾。以后请多关照。”</p>
-<p>掌声稀稀拉拉。几道目光在她脸上停留——眼睛很大，刘海卷卷的，垂在眉毛上面。</p>
-<p>周老师指向最后一排靠窗的位置。“先坐那儿，过几天再调。”</p>
-<p>温霜禾走过去。教室里的过道很窄，两边的课桌堆满课本和杂物。她侧着身子往里走，书包蹭到一个男生的桌角。</p>
-<p>“对不起。”她小声说。</p>
-<p>那个男生没有理她，甚至没有抬头。</p>
-<p>温霜禾继续往前走，在最后一排靠窗的位置坐下来。桌面很干净，只有一支黑色中性笔放在右上角，笔帽被咬出几道痕。她没碰那支笔，把自己的书一本一本摆好。动作很熟练。新学校的规矩她清楚，不用任何人教。</p>
-<p>摆书的时候，手指碰到课桌内侧的边缘。那里不太光滑。她低下头看一眼，木面上有几道浅浅的刻痕，像是用笔尖一点点划出来的。字很小，被磨得有些模糊，但她还是认出来。</p>
-<p>WSH。</p>
-<p>她的名字首字母。</p>
-<p>温霜禾盯着那三个字母看一会儿。也许是巧合。也许是从前的学生随便画的。这张桌子很旧，边角都磨圆，谁在上面写过什么都不奇怪。她把手缩回来，没再碰。</p>
-<p>窗外是操场，篮球架旁的雪还没人扫。远处的梧桐光秃秃的，枝条伸向灰白的天。</p>
-<p>春天还没有来。</p>
-<p>第一节课语文。周老师讲朱自清的《春》，念到“盼望着，盼望着，东风来了，春天的脚步近了”，问这句用了什么修辞。</p>
-<p>教室安静几秒。</p>
-<p>温霜禾听见旁边有人开口，每个字都咬得很清楚。</p>
-<p>“反复。”</p>
-<p>她回头。</p>
-<p>说话的是个男生，就坐在她右侧。校服拉链拉到最上面，下巴被领口遮住一半。侧脸很瘦，睫毛垂着，不太愿意让人看见眼睛的样子。</p>
-<p>他回答完之后就没有再开口，连头都没有抬。</p>
-<p>周老师点头。“对。江春屿答得很好。”</p>
-<p>江春屿。</p>
-<p>温霜禾在心里念一遍这个名字。</p>
-<p>下课后，教室重新吵起来。有人问她从哪里转来，有人问她成绩是不是很好。温霜禾都笑着答，能短就短，不把话说深。</p>
-<p>“你以前在哪上学？”一个短发女生问。</p>
-<p>“南边。”</p>
-<p>“南边哪？”</p>
-<p>“一个小地方。”温霜禾笑笑，“你没听说过。”</p>
-<p>短发女生还想问，被旁边的人拉走。温霜禾听见她们小声说：“别问了，转学生一般都不爱说这些。”</p>
-<p>她低下头，继续整理书本。</p>
-<p>风从窗缝里钻进来，吹动课本里夹着的一张空白草稿纸。纸边翻起来，露出她刚刚无意识写下的一行字：</p>
-<p>春天什么时候来。</p>
-<p>她怔一下，连忙把纸压住。</p>
-<p>旁边那支黑色中性笔被风吹得滚一点，停在她手边。</p>
-<p>她没碰。</p>
-<p>放学时天色已暗。温霜禾背着书包，沿着大姨给的地址往杂货铺走。路不长，穿过两条街，拐进围墙边的小巷。</p>
-<p>巷口，那个短发女生追上来，跑得有点喘。“温霜禾，等等！”</p>
-<p>温霜禾停下，回头。“怎么了？”</p>
-<p>“忘了跟你说，明天记得带数学课本，老周要查。”短发女生说，又补一句，“我叫周敏，坐你前面两排。以后有事找我。”</p>
-<p>“好，谢谢你。”</p>
-<p>“客气什么。”周敏摆摆手，又压低声音，“对了，跟你说个事。咱们班那个江春屿，你同桌，他不太爱说话，你别觉得他针对你。他就那样，对谁都一样。”</p>
-<p>温霜禾点头。“我知道的。”</p>
-<p>“你倒是适应得快。”周敏打量她一眼，笑起来，“行，那我先走了，我家在那边。”</p>
-<p>她指了指相反的方向，转身跑开。</p>
-<p>温霜禾站在原地，看着她的背影消失在路灯下，才继续往前走。巷子两边的墙很高，把天空切成一条窄窄的缝。路灯亮起，照在还没化尽的雪上，泛着昏黄的光。她怕黑，不自觉走快两步，书包带被攥得更紧。</p>
-<p>杂货铺的灯亮着，暖黄的一块，从门帘底下漏出来。门帘是那种塑料条的，被风一吹就哗啦响。她推开门，暖气和酱油味一起涌过来。</p>
-<p>“大姨，我回来了。”</p>
-<p>锅里有饺子，韭菜鸡蛋馅，皮有点厚。大姨坐在对面看她吃，问第一天习不习惯。</p>
-<p>温霜禾低头咬一口。“还行。”</p>
-<p>“同学呢？”</p>
-<p>“也还行。”</p>
-<p>大姨没再问，起身去后仓搬货。温霜禾一个人坐在柜台后面的小桌旁，把饺子吃完，把碗洗净，回到大姨给她收拾出来的小房间。</p>
-<p>房间很小，一张床，一张书桌，一盏台灯。窗户对着巷子，路灯的光从窗帘缝里漏进来，在墙上画一道细细的亮线，像一道伤疤。</p>
-<p>她坐在书桌前，把那张草稿纸抽出来。纸上只有一句话。</p>
-<p>春天什么时候来。</p>
-<p>她看很久，在下面写：</p>
-<p>应该快了。</p>
-<p>写完，她想起白天在课桌内侧看到的那三个字母。WSH。谁刻的？这个答案，她要等到很久以后才会知道。谁也没想到，这个名字会跟着她很多年。</p>
+        <div class="section-head reveal"><span class="section-index">04</span><h2 id="trial-title">摘句</h2></div>
+        <div class="excerpts" aria-label="全书摘句">
+          <article class="excerpt reveal" style="--delay:60ms"><p>母亲抓住她的手，眼泪掉得更凶：“别捡，别捡……”</p><cite>第001章</cite></article>
+          <article class="excerpt reveal" style="--delay:90ms"><p>母亲的声音很低，像隔着很多层布：“霜禾，你爸昨天来找我了。他问你在哪儿。我没说。”</p><cite>第008章</cite></article>
+          <article class="excerpt reveal" style="--delay:120ms"><p>“它想活。”江春屿说。</p><cite>第012章</cite></article>
+          <article class="excerpt reveal" style="--delay:150ms"><p>冬天要来了，她把笔袋抱紧一点，鼓鼓的。</p><cite>第020章</cite></article>
+          <article class="excerpt reveal" style="--delay:180ms"><p>“我怕慢。”</p><cite>第032章</cite></article>
+          <article class="excerpt reveal" style="--delay:210ms"><p>她想起小时候，母亲说过：“雪是天上掉下来的安静。记住这个。”</p><cite>第040章</cite></article>
+          <article class="excerpt reveal" style="--delay:240ms"><p>“怕你出事。”江春屿说。</p><cite>第040章</cite></article>
+          <article class="excerpt reveal" style="--delay:270ms"><p>他没有回头，只是说了一句“没有人会来”。</p><cite>第059章</cite></article>
+          <article class="excerpt reveal" style="--delay:300ms"><p>那个下午她就知道，只要她不松手，他就不会掉下去。</p><cite>第099章</cite></article>
+          <article class="excerpt reveal" style="--delay:330ms"><p>“……嗯。”她轻声说，“你写了四个字，我就来了。”</p><cite>第110章</cite></article>
+          <article class="excerpt reveal" style="--delay:360ms"><p>“你每次都在。”这句话说完，他低下头，看着自己的手。</p><cite>第126章</cite></article>
+          <article class="excerpt reveal" style="--delay:390ms"><p>“我知道。”大姨说，“大姨不担心。大姨是高兴。你终于不再忍了。”</p><cite>第146章</cite></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="ecosystem" aria-labelledby="ecosystem-title">
+      <div class="shell">
+        <div class="section-head reveal"><span class="section-index">05</span><h2 id="ecosystem-title">创作生态</h2></div>
+        <div class="ecosystem">
+          <article class="workbench reveal" style="--delay:120ms">
+            <div class="workbench-mark" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+            <h3>小说创作工作台</h3>
+            <p>从构思、写作到校对，把长篇创作需要的材料与流程收进一处。它与《暮冬念春》一起成长，也会陪伴之后的每一部作品。</p>
+            <a class="workbench-link" href="https://monesyilya3-niko.github.io/novel-lab-site/" target="_blank" rel="noopener noreferrer">了解工作台 <span aria-hidden="true">→</span></a>
           </article>
+          <div class="reveal" style="--delay:240ms">
+            <p class="channels-intro">小说是起点。更多故事、创作手记与情感内容，将在这些地方陆续相见。</p>
+            <div class="channels" aria-label="内容平台预告">
+              <div class="channel"><span class="channel-num">01</span><span class="channel-name">微信公众号</span><span class="channel-status">即将上线</span></div>
+              <div class="channel"><span class="channel-num">02</span><span class="channel-name">小红书</span><span class="channel-status">敬请期待</span></div>
+              <div class="channel"><span class="channel-num">03</span><span class="channel-name">抖音</span><span class="channel-status">敬请期待</span></div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -394,8 +345,6 @@
     'use strict';
     var root = document.documentElement;
     var hero = document.querySelector('.hero');
-    var reader = document.querySelector('.reader');
-    var progress = document.querySelector('.trial-progress span');
     var backTop = document.querySelector('.back-top');
     var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     var dark = window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -425,11 +374,6 @@
       var max = Math.max(1, document.documentElement.scrollHeight - innerHeight);
       target = Math.min(1, Math.max(0, scrollY / max));
       backTop.classList.toggle('visible', scrollY > innerHeight * .75);
-      if (reader) {
-        var r = reader.getBoundingClientRect();
-        var read = Math.min(1, Math.max(0, (innerHeight - r.top) / (r.height + innerHeight * .45)));
-        progress.style.transform = 'scaleX(' + read.toFixed(4) + ')';
-      }
       if (!reduced) {
         var h = hero.getBoundingClientRect();
         var p = Math.min(1, Math.max(0, -h.top / Math.max(1, h.height)));
