@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>暮冬念春 · 官方宣传站</title>
+<meta name="description" content="《暮冬念春》——长篇校园恋爱小说。二月底的疆州，雪还没化干净。春天什么时候来？">
+<style>
+  :root{
+    --pink:#ec4899;
+    --pink-deep:#db2777;
+    --pink-soft:#fdf2f8;
+    --pink-line:#fbcfe8;
+    --paper:#fffdf9;
+    --ink:#44403c;
+    --ink-soft:#78716c;
+    --card:#ffffff;
+    --radius:16px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans SC",sans-serif;
+    background:var(--paper);
+    color:var(--ink);
+    line-height:1.8;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:720px;margin:0 auto;padding:0 20px}
+
+  /* 顶部导航 */
+  nav{
+    position:sticky;top:0;z-index:50;
+    background:rgba(255,253,249,.88);
+    backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--pink-line);
+  }
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:54px}
+  nav .brand{font-weight:700;letter-spacing:.2em;color:var(--pink-deep);font-size:15px}
+  nav .links{display:flex;gap:16px}
+  nav .links a{color:var(--ink-soft);text-decoration:none;font-size:13px}
+  nav .links a:active{color:var(--pink-deep)}
+
+  /* Hero */
+  .hero{
+    background:linear-gradient(180deg,#fff1f2 0%,#fdf2f8 55%,var(--paper) 100%);
+    padding:44px 0 36px;text-align:center;
+  }
+  .hero .cover{
+    width:min(64vw,280px);border-radius:14px;
+    box-shadow:0 18px 44px rgba(219,39,119,.22),0 4px 12px rgba(0,0,0,.08);
+    display:block;margin:0 auto;
+  }
+  .hero h1{
+    font-family:"Songti SC","Noto Serif SC",serif;
+    font-size:42px;letter-spacing:.35em;text-indent:.35em;
+    margin:26px 0 10px;color:#3f3f46;
+  }
+  .hero .tagline{
+    font-family:"Songti SC","Noto Serif SC",serif;
+    font-size:19px;color:var(--pink-deep);letter-spacing:.12em;
+  }
+  .hero .tagline-sub{font-size:14px;color:var(--ink-soft);margin-top:6px;letter-spacing:.2em}
+  .hero .meta{
+    margin-top:18px;display:flex;gap:8px;justify-content:center;flex-wrap:wrap;
+  }
+  .hero .meta span{
+    font-size:12px;color:var(--pink-deep);background:#fff;
+    border:1px solid var(--pink-line);border-radius:999px;padding:4px 14px;
+  }
+
+  section{padding:34px 0}
+  .sec-title{
+    font-family:"Songti SC","Noto Serif SC",serif;
+    font-size:22px;letter-spacing:.25em;text-indent:.25em;text-align:center;
+    margin-bottom:6px;color:#3f3f46;
+  }
+  .sec-sub{text-align:center;font-size:13px;color:var(--ink-soft);margin-bottom:22px;letter-spacing:.1em}
+  .sec-title::after{
+    content:"";display:block;width:44px;height:3px;border-radius:2px;
+    background:linear-gradient(90deg,var(--pink),var(--pink-line));
+    margin:10px auto 0;
+  }
+
+  /* 梗概 */
+  .synopsis{
+    background:var(--card);border-radius:var(--radius);
+    padding:26px 22px;box-shadow:0 6px 24px rgba(219,39,119,.07);
+    border:1px solid #faf0f4;font-size:15.5px;color:#57534e;
+  }
+  .synopsis p+p{margin-top:14px}
+  .synopsis .hl{color:var(--pink-deep)}
+
+  /* 人物卡 */
+  .char-grid{display:grid;grid-template-columns:1fr;gap:16px}
+  @media(min-width:560px){.char-grid{grid-template-columns:1fr 1fr}}
+  .char-card{
+    background:var(--card);border-radius:var(--radius);padding:22px 20px;
+    border:1px solid #faf0f4;box-shadow:0 6px 24px rgba(219,39,119,.07);
+  }
+  .char-card .role{
+    display:inline-block;font-size:11px;letter-spacing:.2em;
+    color:#fff;background:linear-gradient(90deg,var(--pink),#f472b6);
+    border-radius:999px;padding:3px 12px;margin-bottom:10px;
+  }
+  .char-card h3{font-size:19px;letter-spacing:.15em;margin-bottom:4px}
+  .char-card h3 small{font-size:12px;color:var(--ink-soft);font-weight:400;letter-spacing:.1em}
+  .char-card ul{list-style:none;margin-top:10px;font-size:14px;color:#57534e}
+  .char-card ul li{position:relative;padding-left:18px;margin-top:8px;line-height:1.7}
+  .char-card ul li::before{
+    content:"";position:absolute;left:2px;top:11px;width:7px;height:7px;border-radius:50%;
+    background:var(--pink-line);
+  }
+  .minor{
+    margin-top:16px;background:var(--pink-soft);border-radius:var(--radius);
+    padding:18px 20px;font-size:13.5px;color:#78716c;line-height:2;
+  }
+  .minor b{color:var(--pink-deep);font-weight:600}
+
+  /* 金句 */
+  .quote{
+    background:var(--card);border-left:4px solid var(--pink);
+    border-radius:0 14px 14px 0;padding:18px 20px;margin-bottom:14px;
+    box-shadow:0 4px 16px rgba(219,39,119,.06);
+  }
+  .quote p{
+    font-family:"Songti SC","Noto Serif SC",serif;
+    font-size:17px;color:#44403c;line-height:1.9;
+  }
+  .quote .from{text-align:right;font-size:12px;color:var(--ink-soft);margin-top:8px;letter-spacing:.1em}
+
+  /* 试读 */
+  .trial-notice{
+    text-align:center;font-size:12.5px;color:var(--ink-soft);
+    background:#fffbeb;border:1px dashed #fcd34d;border-radius:10px;
+    padding:10px 14px;margin-bottom:18px;
+  }
+  .reader{
+    background:var(--card);border-radius:var(--radius);
+    border:1px solid #faf0f4;box-shadow:0 6px 24px rgba(219,39,119,.07);
+    padding:30px 22px;
+  }
+  .reader h3{
+    font-family:"Songti SC","Noto Serif SC",serif;text-align:center;
+    font-size:20px;letter-spacing:.2em;margin-bottom:20px;
+  }
+  .reader p{
+    font-family:"Songti SC","Noto Serif SC",serif;
+    font-size:16px;line-height:2;color:#44403c;margin-bottom:14px;text-align:justify;
+  }
+
+  /* 出版状态 */
+  .status{
+    text-align:center;background:linear-gradient(135deg,#fdf2f8,#fff1f2);
+    border:1px solid var(--pink-line);border-radius:var(--radius);padding:30px 20px;
+  }
+  .status .big{
+    font-family:"Songti SC","Noto Serif SC",serif;font-size:21px;
+    letter-spacing:.15em;color:#3f3f46;margin-bottom:8px;
+  }
+  .status .small{font-size:13px;color:var(--ink-soft);letter-spacing:.1em}
+  .status .dots{margin-top:14px;font-size:13px;color:var(--pink-deep);letter-spacing:.4em}
+
+  footer{
+    text-align:center;padding:26px 0 40px;font-size:12px;color:#a8a29e;letter-spacing:.1em;
+  }
+
+  /* 回到顶部 */
+  #topBtn{
+    position:fixed;right:18px;bottom:22px;width:44px;height:44px;border-radius:50%;
+    border:1px solid var(--pink-line);background:rgba(255,255,255,.92);color:var(--pink-deep);
+    font-size:18px;display:none;align-items:center;justify-content:center;
+    box-shadow:0 6px 18px rgba(219,39,119,.18);cursor:pointer;z-index:60;
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="brand">暮冬念春</div>
+    <div class="links">
+      <a href="#story">梗概</a>
+      <a href="#chars">人物</a>
+      <a href="#quotes">金句</a>
+      <a href="#trial">试读</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <img class="cover" src="cover.png" alt="《暮冬念春》封面">
+    <h1>暮冬念春</h1>
+    <div class="tagline">春天什么时候来。</div>
+    <div class="tagline-sub">应该快了。</div>
+    <div class="meta">
+      <span>长篇校园恋爱</span>
+      <span>全书 157 章</span>
+      <span>精修中 · 敬请期待</span>
+    </div>
+  </div>
+</header>
+
+<section id="story">
+  <div class="wrap">
+    <div class="sec-title">故事梗概</div>
+    <div class="sec-sub">STORY</div>
+    <div class="synopsis">
+      <p>二月底的疆州，雪还没化干净。第三次转学的温霜禾站在三中校门口，攥紧了书包带。父亲的债、母亲的眼泪、深夜的争吵——她把疼都藏在练好的笑容后面，很早就学会了<span class="hl">不说疼</span>。</p>
+      <p>新同桌江春屿，是全班最不好接近的人：沉默寡言，对谁都一样冷淡。可这个冷淡的男生，会在她值日时默默拿起另一块抹布，会在她手臂抽痛时把跳绳递到老师手里，会在她躲上天台哭泣时站在门口不靠近也不离开，会在她父亲出现在校门口时<span class="hl">挡在她前面</span>。</p>
+      <p>从写着"春天什么时候来"的草稿纸，到那句"疼就说疼"，再到"敲门，我一般在"的那扇门——两个习惯把自己藏起来的人，在暮冬的雪里，一点点向对方走近。</p>
+      <p>这是一个关于<span class="hl">"被看见"</span>的故事。</p>
+    </div>
+  </div>
+</section>
+
+<section id="chars">
+  <div class="wrap">
+    <div class="sec-title">人物介绍</div>
+    <div class="sec-sub">CHARACTERS</div>
+    <div class="char-grid">
+      <div class="char-card">
+        <span class="role">女主角</span>
+        <h3>温霜禾 <small>wēn shuāng hé</small></h3>
+        <ul>
+          <li>初一三班转学生，这是她第三次转学</li>
+          <li>眼睛很大，刘海卷卷的，笑容是练过的</li>
+          <li>把"没事""不疼"挂在嘴边，疼了也只会说"不疼"</li>
+          <li>历史全班第一，最爱历史；却偏科数学，几何题画三条辅助线都不对</li>
+          <li>最爱吃鸡，吃饭时会把青椒一根根挑出来</li>
+          <li>怕黑，晚上走巷子会不自觉加快脚步</li>
+          <li>心细手巧，黑板报上的迎春花是她一笔笔画的</li>
+        </ul>
+      </div>
+      <div class="char-card">
+        <span class="role">男主角</span>
+        <h3>江春屿 <small>jiāng chūn yǔ</small></h3>
+        <ul>
+          <li>温霜禾的同桌，全班公认"最不好接近"的人</li>
+          <li>侧脸清瘦，手指修长，校服拉链永远拉到最上面</li>
+          <li>话少到"问他三句答一句"，却总在她需要时出现</li>
+          <li>没留名的粉色创可贴、笔帽有咬痕的黑色中性笔、几何题上的"连这里"</li>
+          <li>字写得极稳，从小练字十年</li>
+          <li>父母在国外，一个人住在空荡荡的屋子里</li>
+          <li>手腕内侧，有一道淡淡的红痕</li>
+        </ul>
+      </div>
+    </div>
+    <div class="minor">
+      <b>周敏</b> —— 热心肠的短发前排女生，"以后有事找我"是她的口头禅<br>
+      <b>大姨</b> —— 在围墙边开杂货铺，"放学回来，大姨给你包饺子"<br>
+      <b>母亲</b> —— 远方的母亲，"等家里安稳些，妈妈来接你"
+    </div>
+  </div>
+</section>
+
+<section id="quotes">
+  <div class="wrap">
+    <div class="sec-title">金句摘选</div>
+    <div class="sec-sub">QUOTES · 均出自正文原文</div>
+    <div class="quote">
+      <p>"从那以后，她学会不说疼。"</p>
+      <div class="from">—— 第001章</div>
+    </div>
+    <div class="quote">
+      <p>"春天什么时候来。"</p>
+      <div class="from">—— 第001章</div>
+    </div>
+    <div class="quote">
+      <p>"笔是拿来写的，不是拿来还的。"</p>
+      <div class="from">—— 第004章</div>
+    </div>
+    <div class="quote">
+      <p>"疼就说疼。"</p>
+      <div class="from">—— 第007章</div>
+    </div>
+    <div class="quote">
+      <p>"以后如果来不及回去，敲门。"</p>
+      <div class="from">—— 第010章</div>
+    </div>
+  </div>
+</section>
+
+<section id="trial">
+  <div class="wrap">
+    <div class="sec-title">试读</div>
+    <div class="sec-sub">第001章 · 暮冬未尽时</div>
+    <div class="trial-notice">试读章节为精修前版本，最终以出版稿为准</div>
+    <div class="reader">
+      <h3>第001章　暮冬未尽时</h3>
+      <p>二月底的疆州，雪还没化干净。</p>
+      <p>“到了，下车吧。”大姨拍拍她的肩。温霜禾站在三中校门口，书包带攥在手里，勒出一圈浅红。身后是辆小货车，车厢门敞着，剩一只旧纸箱和一床编织袋裹的被子。那只旧纸箱是母亲的，边角已经磨软。司机蹲在路边抽烟，大姨在传达室替她办手续。</p>
+      <p>母亲没来。父亲也没有。</p>
+      <p>温霜禾低头看脚边的雪。雪被踩脏，薄薄一层贴着水泥地，边缘泛着灰黑。她用鞋尖碰一下，雪碎开，底下露出灰黄的泥水。风从巷口灌进来，凉飕飕的，顺着领口往下钻。</p>
+      <p>这是她第三次转学。</p>
+      <p>第一次小学三年级，家里被父亲欠的债拖垮，债主半夜砸门。母亲抱着她躲在旅馆里，一夜没敢开灯。旅馆的被子有股霉味，母亲的手臂箍在她身上，她害怕得喘不过气，却没敢动。第二次小学五年级，父亲跪在门口说自己会改，母亲心软回去，第三天茶几又碎。玻璃碴子崩一地，母亲蹲着捡，手指流血，没敢哭出声。</p>
+      <p>温霜禾记得那天晚上。</p>
+      <p>她躲在房间里，捂着耳朵，听见外面摔东西的声音。玻璃碎裂，母亲压抑的哭，父亲含糊的咒骂。她数到一百，声音停。又数到两百，才敢开门。</p>
+      <p>母亲蹲在碎片里，手指划破，血滴在白色碎玻璃上，像开一朵小花。那朵花很小，红色的，和母亲的眼泪一样安静。</p>
+      <p>“妈。”她喊一声。</p>
+      <p>母亲抬头，脸上有泪痕，却笑着说：“没事，妈妈不小心打碎茶几。”</p>
+      <p>温霜禾没说话。她走过去，蹲下来，和母亲一起捡。玻璃锋利，她的手被划一道，血渗出来，没吭声。</p>
+      <p>母亲抓住她的手，眼泪掉得更凶：“别捡，别捡……”</p>
+      <p>“没事。”温霜禾说，“不疼。”</p>
+      <p>其实疼。指尖发白，掌心冒汗，但她知道，说疼也没有用。只会让爱她的人更难受。</p>
+      <p>从那以后，她学会不说疼。</p>
+      <p>这一次，母亲没跟她一起走。临走前，母亲把钱塞进大姨手里，手指发抖，攥紧又松开，松开又攥紧，最后才放开。母亲蹲下来，把她的围巾裹紧，嘴唇微微动一下，像要说什么，最后只摸摸她的头。</p>
+      <p>“等家里安稳些，妈妈来接你。”</p>
+      <p>温霜禾点头。</p>
+      <p>她没问什么时候安稳。她已经知道，有些大人说出口的话，只是暂时让人别追问的办法。</p>
+      <p>“温霜禾？”</p>
+      <p>周老师三十多岁，扎着低马尾，站在传达室门口叫她。大姨跟在后面，手里拿着一叠表格，笑得有点局促。</p>
+      <p>“手续办完，初一三班，班主任姓周。”老师看她一眼，语气放缓，“成绩不错，到新班好好适应。”</p>
+      <p>温霜禾点头。“好。”</p>
+      <p>声音很轻。</p>
+      <p>大姨把她的围巾往上拉一拉，围巾边缘起毛球，蹭着下巴痒痒的。那条围巾是母亲织的，针脚有些松，像母亲此刻的心。“放学别乱跑，直接回杂货铺。要是有人欺负你，跟大姨说。”</p>
+      <p>“不会的。”温霜禾说，“我都多大了。”</p>
+      <p>“多大也是孩子。”大姨瞪她一眼，又看向老师，“老师，我们家这孩子老实，要是有什么事，您打我电话，我随叫随到。”</p>
+      <p>周老师笑。“您放心，我们班氛围挺好的。”</p>
+      <p>“那就好，那就好。”大姨搓搓手，从口袋里摸出一把糖，硬塞进老师手里，“这是我们自己铺里卖的，您尝尝，别嫌弃。”</p>
+      <p>周老师推辞不过，收下。“您太客气。”</p>
+      <p>大姨这才放心些，蹲下来帮温霜禾理理衣领，低声说：“放学回来，大姨给你包饺子。”</p>
+      <p>温霜禾抬起脸，冲大姨笑一下。</p>
+      <p>这个笑她练过很多次。嘴角弯起来，眼睛跟着软一点，看起来懂事、乖巧、不给任何人添麻烦。</p>
+      <p>“没人会欺负我的。”</p>
+      <p>大姨看着她，想说什么，最后只是叹气，把旧纸箱抱回车边。</p>
+      <p>教学楼是红砖的，墙角堆着没扫干净的积雪。走廊贴满光荣榜和班级评比栏，红纸黄字，边角被风吹得卷起来。学生们从她身边跑过去，衣袖擦过她的手背，带起一阵凉风。她往旁边让让，背贴上冰凉的墙。</p>
+      <p>周老师见到她，先笑一下。</p>
+      <p>“进来吧。”</p>
+      <p>教室里一瞬间安静。几十双眼睛看过来，有好奇，有打量，也有漫不经心。空气里有粉笔灰和暖气片烘出来的干燥味道。温霜禾走上讲台，手指在袖口里蜷着，脸上仍然挂着那个标准的笑。</p>
+      <p>“我叫温霜禾，温暖的温，霜降的霜，禾苗的禾。以后请多关照。”</p>
+      <p>掌声稀稀拉拉。几道目光在她脸上停留——眼睛很大，刘海卷卷的，垂在眉毛上面。</p>
+      <p>周老师指向最后一排靠窗的位置。“先坐那儿，过几天再调。”</p>
+      <p>温霜禾走过去。教室里的过道很窄，两边的课桌堆满课本和杂物。她侧着身子往里走，书包蹭到一个男生的桌角。</p>
+      <p>“对不起。”她小声说。</p>
+      <p>那个男生没有理她，甚至没有抬头。</p>
+      <p>温霜禾继续往前走，在最后一排靠窗的位置坐下来。桌面很干净，只有一支黑色中性笔放在右上角，笔帽被咬出几道痕。她没碰那支笔，把自己的书一本一本摆好。动作很熟练。新学校的规矩她清楚，不用任何人教。</p>
+      <p>摆书的时候，手指碰到课桌内侧的边缘。那里不太光滑。她低下头看一眼，木面上有几道浅浅的刻痕，像是用笔尖一点点划出来的。字很小，被磨得有些模糊，但她还是认出来。</p>
+      <p>WSH。</p>
+      <p>她的名字首字母。</p>
+      <p>温霜禾盯着那三个字母看一会儿。也许是巧合。也许是从前的学生随便画的。这张桌子很旧，边角都磨圆，谁在上面写过什么都不奇怪。她把手缩回来，没再碰。</p>
+      <p>窗外是操场，篮球架旁的雪还没人扫。远处的梧桐光秃秃的，枝条伸向灰白的天。</p>
+      <p>春天还没有来。</p>
+      <p>第一节课语文。周老师讲朱自清的《春》，念到“盼望着，盼望着，东风来了，春天的脚步近了”，问这句用了什么修辞。</p>
+      <p>教室安静几秒。</p>
+      <p>温霜禾听见旁边有人开口，每个字都咬得很清楚。</p>
+      <p>“反复。”</p>
+      <p>她回头。</p>
+      <p>说话的是个男生，就坐在她右侧。校服拉链拉到最上面，下巴被领口遮住一半。侧脸很瘦，睫毛垂着，不太愿意让人看见眼睛的样子。</p>
+      <p>他回答完之后就没有再开口，连头都没有抬。</p>
+      <p>周老师点头。“对。江春屿答得很好。”</p>
+      <p>江春屿。</p>
+      <p>温霜禾在心里念一遍这个名字。</p>
+      <p>下课后，教室重新吵起来。有人问她从哪里转来，有人问她成绩是不是很好。温霜禾都笑着答，能短就短，不把话说深。</p>
+      <p>“你以前在哪上学？”一个短发女生问。</p>
+      <p>“南边。”</p>
+      <p>“南边哪？”</p>
+      <p>“一个小地方。”温霜禾笑笑，“你没听说过。”</p>
+      <p>短发女生还想问，被旁边的人拉走。温霜禾听见她们小声说：“别问了，转学生一般都不爱说这些。”</p>
+      <p>她低下头，继续整理书本。</p>
+      <p>风从窗缝里钻进来，吹动课本里夹着的一张空白草稿纸。纸边翻起来，露出她刚刚无意识写下的一行字：</p>
+      <p>春天什么时候来。</p>
+      <p>她怔一下，连忙把纸压住。</p>
+      <p>旁边那支黑色中性笔被风吹得滚一点，停在她手边。</p>
+      <p>她没碰。</p>
+      <p>放学时天色已暗。温霜禾背着书包，沿着大姨给的地址往杂货铺走。路不长，穿过两条街，拐进围墙边的小巷。</p>
+      <p>巷口，那个短发女生追上来，跑得有点喘。“温霜禾，等等！”</p>
+      <p>温霜禾停下，回头。“怎么了？”</p>
+      <p>“忘了跟你说，明天记得带数学课本，老周要查。”短发女生说，又补一句，“我叫周敏，坐你前面两排。以后有事找我。”</p>
+      <p>“好，谢谢你。”</p>
+      <p>“客气什么。”周敏摆摆手，又压低声音，“对了，跟你说个事。咱们班那个江春屿，你同桌，他不太爱说话，你别觉得他针对你。他就那样，对谁都一样。”</p>
+      <p>温霜禾点头。“我知道的。”</p>
+      <p>“你倒是适应得快。”周敏打量她一眼，笑起来，“行，那我先走了，我家在那边。”</p>
+      <p>她指了指相反的方向，转身跑开。</p>
+      <p>温霜禾站在原地，看着她的背影消失在路灯下，才继续往前走。巷子两边的墙很高，把天空切成一条窄窄的缝。路灯亮起，照在还没化尽的雪上，泛着昏黄的光。她怕黑，不自觉走快两步，书包带被攥得更紧。</p>
+      <p>杂货铺的灯亮着，暖黄的一块，从门帘底下漏出来。门帘是那种塑料条的，被风一吹就哗啦响。她推开门，暖气和酱油味一起涌过来。</p>
+      <p>“大姨，我回来了。”</p>
+      <p>锅里有饺子，韭菜鸡蛋馅，皮有点厚。大姨坐在对面看她吃，问第一天习不习惯。</p>
+      <p>温霜禾低头咬一口。“还行。”</p>
+      <p>“同学呢？”</p>
+      <p>“也还行。”</p>
+      <p>大姨没再问，起身去后仓搬货。温霜禾一个人坐在柜台后面的小桌旁，把饺子吃完，把碗洗净，回到大姨给她收拾出来的小房间。</p>
+      <p>房间很小，一张床，一张书桌，一盏台灯。窗户对着巷子，路灯的光从窗帘缝里漏进来，在墙上画一道细细的亮线，像一道伤疤。</p>
+      <p>她坐在书桌前，把那张草稿纸抽出来。纸上只有一句话。</p>
+      <p>春天什么时候来。</p>
+      <p>她看很久，在下面写：</p>
+      <p>应该快了。</p>
+      <p>写完，她想起白天在课桌内侧看到的那三个字母。WSH。谁刻的？这个答案，她要等到很久以后才会知道。谁也没想到，这个名字会跟着她很多年。</p>
+    </div>
+  </div>
+</section>
+
+<section id="status">
+  <div class="wrap">
+    <div class="status">
+      <div class="big">全书 157 章 · 精修中</div>
+      <div class="small">长篇校园恋爱小说《暮冬念春》，正在精修打磨，敬请期待</div>
+      <div class="dots">···</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">© 2026《暮冬念春》</div>
+</footer>
+
+<button id="topBtn" aria-label="回到顶部">↑</button>
+<script>
+  var btn = document.getElementById('topBtn');
+  window.addEventListener('scroll', function(){
+    btn.style.display = window.scrollY > 600 ? 'flex' : 'none';
+  }, {passive:true});
+  btn.addEventListener('click', function(){
+    window.scrollTo({top:0, behavior:'smooth'});
+  });
+</script>
+</body>
+</html>
