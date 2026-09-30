@@ -153,6 +153,11 @@
     .excerpt-text--quiet p { font-size: clamp(23px, 3.6vw, 39px); line-height: 1.72; }
     .excerpt-text cite { display: block; margin-top: 22px; color: rgb(var(--muted)); font-size: 11px; font-style: normal; letter-spacing: .16em; }
 
+    .read-guide { padding: clamp(64px, 8vw, 104px) 0; border-top: 1px solid rgba(var(--line), .56); }
+    .read-guide-inner { width: min(100%, var(--reading)); margin: auto; display: grid; grid-template-columns: minmax(0, .72fr) minmax(0, 1.28fr); align-items: baseline; gap: clamp(24px, 5vw, 64px); }
+    .read-guide h2 { margin: 0; color: rgb(var(--accent)); font-size: clamp(18px, 2.1vw, 24px); font-weight: 500; letter-spacing: .16em; }
+    .read-guide p { margin: 0; font-family: var(--font-serif); font-size: clamp(20px, 2.8vw, 30px); line-height: 1.7; letter-spacing: .055em; }
+
     .gallery-intro { width: min(100%, 760px); margin: calc(clamp(44px, 7vw, 76px) * -.42) auto clamp(62px, 8vw, 104px); color: rgb(var(--muted)); font-family: var(--font-serif); font-size: clamp(18px, 2.3vw, 24px); line-height: 1.8; letter-spacing: .07em; }
     .gallery-grid { width: min(100%, 1120px); margin: auto; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: clamp(24px, 4vw, 54px); row-gap: clamp(70px, 9vw, 126px); align-items: start; }
     .gallery-item { margin: 0; min-width: 0; }
@@ -259,6 +264,8 @@
       .excerpt-text--small { width: 82%; margin-left: 0; }
       .excerpt-text p { font-size: 30px; line-height: 1.58; }
       .excerpt-text--quiet p { font-size: 25px; line-height: 1.75; }
+      .read-guide-inner { grid-template-columns: 1fr; gap: 16px; }
+      .read-guide p { font-size: 22px; }
       .gallery-intro { margin-top: -12px; margin-bottom: 54px; font-size: 18px; }
       .gallery-grid { grid-template-columns: 1fr; gap: 58px; }
       .gallery-item:nth-child(n) { grid-column: 1; margin-top: 0; width: 100%; }
@@ -393,6 +400,15 @@
           <article class="excerpt-text excerpt-text--right excerpt-text--quiet reveal"><p>“……嗯。”她轻声说，“你写了四个字，我就来了。”</p><cite>第110章</cite></article>
           <article class="excerpt-text excerpt-text--small reveal"><p>“你每次都在。”这句话说完，他低下头，看着自己的手。</p><cite>第126章</cite></article>
           <article class="excerpt-text excerpt-text--wide reveal"><p>“我知道。”大姨说，“大姨不担心。大姨是高兴。你终于不再忍了。”</p><cite>第146章</cite></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="read-guide" aria-labelledby="read-guide-title">
+      <div class="shell">
+        <div class="read-guide-inner reveal">
+          <h2 id="read-guide-title">去哪里读</h2>
+          <p>在番茄小说网搜索《暮冬念春》，即可阅读。</p>
         </div>
       </div>
     </section>
