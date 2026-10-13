@@ -227,20 +227,6 @@
     .back-top { position: fixed; right: max(18px, env(safe-area-inset-right)); bottom: max(18px, env(safe-area-inset-bottom)); z-index: 90; width: 44px; height: 44px; border: 1px solid rgb(var(--line)); border-radius: 50%; background: rgba(var(--surface-strong), .88); color: rgb(var(--ink)); backdrop-filter: blur(12px); cursor: pointer; opacity: .72; transform: translateY(0); transition: opacity .2s ease, transform .2s ease; }
     .back-top:hover, .back-top:focus-visible, .back-top.visible { opacity: 1; transform: translateY(0); }
 
-    .music { position: fixed; left: max(18px, env(safe-area-inset-left)); bottom: max(18px, env(safe-area-inset-bottom)); z-index: 95; display: flex; align-items: flex-end; gap: 10px; }
-    .music-toggle { display: inline-flex; align-items: center; gap: 9px; height: 44px; padding: 0 16px 0 12px; border: 1px solid rgb(var(--line)); border-radius: 22px; background: rgba(var(--surface-strong), .88); color: rgb(var(--ink)); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); font-family: var(--font-serif); font-size: 13px; letter-spacing: .14em; cursor: pointer; opacity: .82; transition: opacity .2s ease; }
-    .music-toggle:hover, .music-toggle:focus-visible, .music.open .music-toggle { opacity: 1; }
-    .music-bars { display: inline-flex; align-items: flex-end; gap: 2px; height: 14px; }
-    .music-bars i { display: block; width: 2px; height: 5px; background: rgb(var(--accent)); border-radius: 1px; }
-    .music.open .music-bars i { animation: musicbar 1.1s ease-in-out infinite; }
-    .music.open .music-bars i:nth-child(2) { animation-delay: .25s; }
-    .music.open .music-bars i:nth-child(3) { animation-delay: .5s; }
-    @keyframes musicbar { 0%,100% { height: 4px; } 50% { height: 14px; } }
-    .music-panel { width: min(320px, calc(100vw - 36px)); padding: 10px; border: 1px solid rgb(var(--line)); background: rgba(var(--surface-strong), .94); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); box-shadow: 0 18px 50px rgba(var(--shadow), .12); }
-    .music-panel[hidden] { display: none; }
-    .music-panel p { margin: 2px 4px 8px; color: rgb(var(--muted)); font-size: 11px; letter-spacing: .12em; }
-    .music-panel iframe { display: block; width: 100%; height: 80px; border: 0; border-radius: 12px; }
-    .music.open { flex-direction: column; align-items: flex-start; }
     .reveal { opacity: .88; transform: translateY(24px); transition: opacity .72s cubic-bezier(.2,.7,.2,1), transform .72s cubic-bezier(.2,.7,.2,1); transition-delay: var(--delay, 0ms); }
     .reveal.in { opacity: 1; transform: translateY(0); }
 
@@ -607,12 +593,7 @@
     </section>
   </main>
   <footer>© 2026《暮冬念春》</footer>
-  <div class="music" id="music">
-    <div class="music-panel" id="music-panel" hidden>
-      <p>此刻 · 袁娅维 ·《早春晴朗》片尾曲</p>
-    </div>
-    <button class="music-toggle" id="music-toggle" type="button" aria-expanded="false" aria-controls="music-panel"><span class="music-bars" aria-hidden="true"><i></i><i></i><i></i></span>此刻</button>
-  </div>
+  <audio id="bgm" src="cike.mp3" loop preload="auto" playsinline></audio>
   <button class="back-top" type="button" aria-label="回到顶部">↑</button>
 
   <script>
@@ -678,22 +659,27 @@
       document.querySelectorAll('.reveal').forEach(function (el) { el.classList.add('in'); });
     }
 
-    var music = document.getElementById('music');
-    var musicBtn = document.getElementById('music-toggle');
-    var musicPanel = document.getElementById('music-panel');
-    musicBtn.addEventListener('click', function () {
-      var open = musicPanel.hidden;
-      if (open && !musicPanel.querySelector('iframe')) {
-        var f = document.createElement('iframe');
-        f.src = 'https://open.spotify.com/embed/track/4rag2uzimHUlC0butO7zp9?utm_source=generator&theme=0';
-        f.title = '此刻 - 袁娅维';
-        f.allow = 'autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture';
-        f.loading = 'lazy';
-        musicPanel.appendChild(f);
-      }
-      musicPanel.hidden = !open;
-      music.classList.toggle('open', open);
-      musicBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+
+    var bgm = document.getElementById('bgm');
+    var bgmStarted = false;
+    function fadeIn() {
+      var v = 0; bgm.volume = 0;
+      var t = setInterval(function () { v = Math.min(0.6, v + 0.03); bgm.volume = v; if (v >= 0.6) clearInterval(t); }, 120);
+    }
+    var bgmEvents = ['pointerdown', 'touchstart', 'touchend', 'keydown', 'click', 'wheel', 'scroll'];
+    function unbind() { bgmEvents.forEach(function (e) { removeEventListener(e, startBgm, true); }); }
+    function startBgm() {
+      if (bgmStarted) return;
+      var p = bgm.play();
+      if (p && p.then) {
+        p.then(function () { if (!bgmStarted) { bgmStarted = true; fadeIn(); unbind(); } }).catch(function () {});
+      } else { bgmStarted = true; fadeIn(); unbind(); }
+    }
+    bgmEvents.forEach(function (e) { addEventListener(e, startBgm, { capture: true, passive: true }); });
+    startBgm();
+    document.addEventListener('visibilitychange', function () {
+      if (!bgmStarted) return;
+      if (document.hidden) bgm.pause(); else bgm.play().catch(function () {});
     });
     backTop.addEventListener('click', function () { window.scrollTo({ top: 0, behavior: reduced ? 'auto' : 'smooth' }); });
   }());
