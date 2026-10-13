@@ -593,7 +593,7 @@
     </section>
   </main>
   <footer>© 2026《暮冬念春》</footer>
-  <audio id="bgm" src="cike.mp3" loop preload="auto" playsinline></audio>
+  <audio id="bgm" src="/cike.mp3?v=2" loop preload="auto" playsinline></audio>
   <button class="back-top" type="button" aria-label="回到顶部">↑</button>
 
   <script>
@@ -666,7 +666,7 @@
       var v = 0; bgm.volume = 0;
       var t = setInterval(function () { v = Math.min(0.6, v + 0.03); bgm.volume = v; if (v >= 0.6) clearInterval(t); }, 120);
     }
-    var bgmEvents = ['pointerdown', 'touchstart', 'touchend', 'keydown', 'click', 'wheel', 'scroll'];
+    var bgmEvents = ['pointerdown', 'pointerup', 'mousedown', 'touchstart', 'touchend', 'keydown', 'click', 'wheel', 'scroll'];
     function unbind() { bgmEvents.forEach(function (e) { removeEventListener(e, startBgm, true); }); }
     function startBgm() {
       if (bgmStarted) return;
